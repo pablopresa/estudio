@@ -1,0 +1,61 @@
+.imagen-fondo-1,
+.imagen-fondo-2,
+.imagen-fondo-3 {
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.largo1 {
+  height: 100rem;
+}
+
+.largo2 {
+  height: 21em;
+}
+
+.largo3 {
+  height: 10em;
+}
+
+.imagen-fondo-1 {
+  background-image: url("../../../assets/fondo-generico.jpg");
+}
+
+.imagen-fondo-2 {
+  background-image: url("../../../assets/fondo-generico2.jpg");
+}
+
+.imagen-fondo-3 {
+  background-image: url("../../../assets/img_parallax3.jpg");
+}
+
+.card-container {
+
+  padding: 55rem 0 0 0;
+}
+#card-estudio-contable-img,
+#card-estudio-juridico-img{
+
+  display: inline-block;
+}
+
+.frase1 {
+
+  text-align: center;
+  font-style: italic;
+  margin: 1em 0 0 0
+}
+
+::ng-deep .p-toolbar-group-right .p-button{
+
+  font-family: 'Trirong', serif; 
+  color: #350468; 
+  font-size: 21px;
+  font-weight: lighter;
+}
+
+/* ::ng-deep .p-toolbar .estilosNavbar{
+  height: 300px!important;
+  background-attachment: fixed;
+} */

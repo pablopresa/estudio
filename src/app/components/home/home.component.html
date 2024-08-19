@@ -1,0 +1,62 @@
+<p-toolbar [style]="estilosNavbar">
+    <div class="p-toolbar-group-left">
+        <img src="./../assets/logo3.png" alt="Logo" height="65" class="ml-6">
+        <p class="ml-5" style="font-family: 'Trirong', serif; color: #350468; font-size: 21px">Estudio Tassano Ferrés</p>
+    </div>
+
+    <div class="p-toolbar-group-right" style="margin-left: 40em;">
+
+        <p-button class="boton_navbar" label="Inicio" [text]="true" (click)="scrollear('inicio')" size="large"></p-button>
+        <p-button class="boton_navbar" label="Nosotros" [text]="true" (click)="scrollear('nosotros')" size="large"></p-button>
+        <p-button class="boton_navbar" label="Legal" [text]="true" (click)="scrollear('juridica')" size="large"></p-button>
+        <p-button class="boton_navbar" label="Contable" [text]="true" (click)="scrollear('contabilidad')" size="large"></p-button>
+        <p-button class="boton_navbar" label="Contacto" [text]="true" (click)="scrollear('contabilidad')" size="large"></p-button>
+        <p-button class="boton_navbar" label="Noticias" [text]="true" (click)="scrollear('contabilidad')" size="large"></p-button>
+
+    </div>
+
+    <div class="p-toolbar-group-left">&nbsp;</div>
+
+</p-toolbar>
+
+<div class="imagen-fondo-1 largo1">
+
+    <div class="card-container">
+        <p-card id="card-estudio-juridico-img" header="Solución Jurídica" subheader="Dra. Juliana Tassano"
+        (mouseover)="hoverIn($event)" (mouseout)="hoverOut($event)"
+        [style]="{ 'width': '360px', 'height':'360px'}">
+        <p-image alt="Card" src="../../../assets/juridico1.jpg" class="card-image" width="300px" height="180px"></p-image>
+        <div></div>
+        <ng-template pTemplate="footer">
+            <p-button id="btn-mas-juridico" label="Más" class="p-button-secondary card-button"></p-button>
+        </ng-template>
+    </p-card>
+    
+    <p-card id="card-estudio-contable-img" header="Solución Contable" subheader="Cra. Florencia Tassano"
+    (mouseover)="hoverIn($event)" (mouseout)="hoverOut($event)"
+    [style]="{ 'width': '360px', 'height':'360px'}">
+    <p-image alt="Card" src="../../../assets/estudio-contable.jpg" width="300px" height="180px"></p-image>
+    <div></div>
+    <ng-template pTemplate="footer">
+        <p-button id="btn-mas-contable" label="Más" class="p-button-secondary card-button"></p-button>
+    </ng-template>
+</p-card>
+<!-- <app-image-card imagen="../../../assets/estudio-contable.jpg" textoBoton="Texto del botón">
+</app-image-card> -->
+</div>
+
+</div>
+
+<div>
+    <p class="frase1"> {{ frase1 }}</p>
+    <p style="text-align:right; font-style: italic; padding-right:17em;  margin:0 0 1em 0"> {{ frase2 }}</p>
+</div>
+
+<div class="imagen-fondo-1 largo3"></div>
+
+<div class="sobre-nosotros">
+    <p style="text-align:right; font-style: italic; padding-right:17em;  margin:0 0 1em 0"> {{ sobreNosotros }}</p>
+</div>
+
+<div class="imagen-fondo-1 largo1">
+</div>
