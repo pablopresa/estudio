@@ -26,21 +26,40 @@ export class HomeComponent extends BaseComponent implements OnInit {
   public frase1: string = Mensajes.FRASE_STEVE_JOBS1;
   public frase2: string = Mensajes.FRASE_STEVE_JOBS2;
   public sobreNosotros: string = Mensajes.SOBRE_NOSOTROS;
-  public estilosNavbar: any = { 'background-image': 'linear-gradient(to right, #e6e6e6, var(--orange-100))', 'background-attachment': 'fixed' };
+  public estilosNavbar: any = {
+    'background-image': 'linear-gradient(to right, #e6e6e6, var(--orange-100))',
+    'background-attachment': 'fixed',
+    'position': 'fixed',
+    'top': 0,
+    'width': '100%',
+    'z-index': 40
+  };
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {
     super();
   }
 
   ngOnInit(): void {
-    const botonJ = this.elementRef.nativeElement.querySelector('#btn-mas-juridico');
-    const botonC = this.elementRef.nativeElement.querySelector('#btn-mas-contable');
 
-    if (botonJ && botonC) {
-      this.renderer.setStyle(botonJ, 'opacity', '0');
-      this.renderer.setStyle(botonJ, 'visibility', 'hidden');
-      this.renderer.setStyle(botonC, 'opacity', '0');
-      this.renderer.setStyle(botonC, 'visibility', 'hidden');
+    const cardJ = this.elementRef.nativeElement.querySelector('#card-estudio-juridico-img');
+    const cardC = this.elementRef.nativeElement.querySelector('#card-estudio-contable-img');
+
+    if (cardJ && cardC) {
+      
+      this.renderer.setStyle(cardJ, 'opacity', '0');
+      this.renderer.setStyle(cardJ, 'visibility', 'hidden');
+      this.renderer.setStyle(cardC, 'opacity', '0');
+      this.renderer.setStyle(cardC, 'visibility', 'hidden');
+
+      const botonJ = this.elementRef.nativeElement.querySelector('#btn-mas-juridico');
+      const botonC = this.elementRef.nativeElement.querySelector('#btn-mas-contable');
+
+      if (botonJ && botonC) {
+        this.renderer.setStyle(botonJ, 'opacity', '0');
+        this.renderer.setStyle(botonJ, 'visibility', 'hidden');
+        this.renderer.setStyle(botonC, 'opacity', '0');
+        this.renderer.setStyle(botonC, 'visibility', 'hidden');
+      }
     }
   }
 
