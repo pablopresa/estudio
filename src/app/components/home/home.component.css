@@ -17,17 +17,9 @@ body {
   background-size: cover;
 }
 
-.largo1 {
+.largo1Pantalla {
   width: 100vw;
   height: 100vh;
-}
-
-.largo2 {
-  height: 10em;
-}
-
-.largo3 {
-  height: 10em;
 }
 
 .imagen-fondo-1 {
@@ -53,7 +45,6 @@ body {
 }
 
 .frase1 {
-
   text-align: center;
   font-style: italic;
   margin: 1em 0 0 0
@@ -67,7 +58,22 @@ body {
   font-weight: lighter;
 }
 
-/* ::ng-deep .p-toolbar .estilosNavbar{
-  height: 300px!important;
-  background-attachment: fixed;
-} */
+.card-container-noticias {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap; /* Evita que las tarjetas se muevan a una nueva línea */
+  overflow-x: auto;  /* Permite el scroll horizontal si las tarjetas no caben en una fila */
+  width: 100%;
+  gap: 3em; /* Espacio entre las tarjetas */
+  margin-top: 10%;
+}
+
+.card-item-noticia {
+  flex: 0 0 auto; /* Asegura que las tarjetas conserven su tamaño y no se redimensionen */
+  display: flex;
+  justify-content: center;
+}
+
+.card-noticia{
+  width: 360px;
+}

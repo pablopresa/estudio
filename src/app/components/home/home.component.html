@@ -26,7 +26,7 @@
 
 </p-toolbar>
 
-<div class="imagen-fondo-1 largo1">
+<div class="imagen-fondo-1 largo1Pantalla">
 
     <div class="card-container">
         <p-card id="card-estudio-juridico-img" header="Solución Jurídica" subheader="Dra. Juliana Tassano"
@@ -40,7 +40,7 @@
         </p-card>
 
         <p-card id="card-estudio-contable-img" header="Solución Contable" subheader="Cra. Florencia Tassano"
-            (mouseover)="hoverIn($event)" (mouseout)="hoverOut($event)"  [style]="{ 'width': '21em', 'height':'21em'}">
+            (mouseover)="hoverIn($event)" (mouseout)="hoverOut($event)" [style]="{ 'width': '21em', 'height':'21em'}">
             <p-image alt="Card" src="../../../assets/estudio-contable.jpg" width="290em" height="180px"></p-image>
             <div></div>
             <ng-template pTemplate="footer">
@@ -55,11 +55,64 @@
     <p style="text-align:right; font-style: italic; padding-right:17em;  margin:0 0 1em 0"> {{ frase2 }}</p>
 </div>
 
-<div class="imagen-fondo-1 largo3"></div>
+<div class="imagen-fondo-2 largo1Pantalla">
+
+    <h2 style="background-color:white; text-align: center; width: 20%; margin-left: 40%">Nosotros</h2>
+
+    <div style="display: flex; align-items: center; margin-left: 20%;">
+        <!-- Imagen de Flo -->
+        <p-card [style]="{width: '50%'}">
+            <img src="../../../assets/fotoPerfilGenerica.jpg" alt="Foto Flo" width="100%">
+        </p-card>
+
+        <!-- Presentación Flo -->
+        <p-card [style]="{width: '70%'}">
+            <div class="p-card-body">
+                <h3>Presentación Flo</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam libero magna, id iaculis augue
+                    euismod eget. Praesent vestibulum justo...</p>
+            </div>
+        </p-card>
+    </div>
+
+    <div style="display: flex; align-items: center; margin-left: 20%;">
+        <p-card [style]="{width: '70%'}">
+            <div class="p-card-body">
+                <h3>Presentación Juli</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam libero magna, id iaculis augue
+                    euismod eget. Praesent vestibulum justo...</p>
+            </div>
+        </p-card>
+        <p-card [style]="{width: '50%'}">
+            <img src="../../../assets/fotoPerfilGenerica.jpg" alt="Foto Juli" width="100%">
+        </p-card>
+    </div>
+
+</div>
+<div class="imagen-fondo-3 largo1Pantalla">
+
+    <h2 style="background-color:white; text-align: center; width: 20%; margin-left: 40%">Noticias</h2>
+
+    <div class="card-container-noticias">
+        <div class="card-item-noticia" *ngFor="let noticia of noticias">
+            <p-card header="{{noticia.titulo}}" [style]="cardNoticia">
+                <ng-template pTemplate="header">
+                    <img alt="Card" [src]="noticia.linkFoto" />
+                </ng-template>
+                <p>
+                    {{noticia.descripcion}}
+                </p>
+                <div class="flex  mt-1">
+                    <p-button (click)="verNoticia(noticia)" label="Ver más" styleClass="w-full" />
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>
 
 <div class="sobre-nosotros">
     <p style="text-align:right; font-style: italic; padding-right:17em;  margin:0 0 1em 0"> {{ sobreNosotros }}</p>
 </div>
 
-<div class="imagen-fondo-1 largo1">
+<div class="imagen-fondo-2 largo1Pantalla">
 </div>

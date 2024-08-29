@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { SharedModules } from '../../shared.module';
 import { BaseComponent } from '../base/base.component';
 import { Mensajes } from '../../recursos/mensajes';
+import { Noticia } from '../../model/noticia';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,28 @@ export class HomeComponent extends BaseComponent implements OnInit {
   siguienteSeccion!: ElementRef;
 
   title = Mensajes.TITULO_PANTALLA;
+
+  noticias: Noticia[] = [
+    {
+      titulo: 'Noticia 1',
+      descripcion: 'Descripción de la noticia 1...',
+      linkFoto: 'https://e.rpp-noticias.io/xlarge/2024/08/12/373937_1625762.webp'
+    },
+    {
+      titulo: 'Noticia 2',
+      descripcion: 'Descripción de la noticia 2...',
+      linkFoto: 'https://e.rpp-noticias.io/xlarge/2024/08/10/374337_1625022.webp'
+    },
+    {
+      titulo: 'Noticia 3',
+      descripcion: 'Descripción de la noticia 3...',
+      linkFoto: 'https://e.rpp-noticias.io/xlarge/2024/08/10/360336_1624975.webp'
+    }
+  ];
+
+  cardNoticia: any = {
+    width: '360px'
+  }
 
   public descripcionEmpresa: string = Mensajes.TEXTO_DESCRIPCION_EMPRESA;
   public tituloSolucionContable: string = Mensajes.TITULO_SOLUCION_CONTABLE;
@@ -45,7 +68,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
     const cardC = this.elementRef.nativeElement.querySelector('#card-estudio-contable-img');
 
     if (cardJ && cardC) {
-      
+
       this.renderer.setStyle(cardJ, 'opacity', '0');
       this.renderer.setStyle(cardJ, 'visibility', 'hidden');
       this.renderer.setStyle(cardC, 'opacity', '0');
@@ -64,25 +87,25 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   public scrollear(seccion: string) {
-
-    switch (seccion) {
-      case 'inicio':
-
-
-        break;
-      case 'contabilidad':
+    
+    // switch (seccion) {
+    //   case 'inicio':
 
 
-        break;
-      case 'juridica':
+    //     break;
+    //   case 'contabilidad':
 
 
-        break;
-      case 'nosotros':
+    //     break;
+    //   case 'juridica':
 
 
-        break;
-    }
+    //     break;
+    //   case 'nosotros':
+
+
+    //     break;
+    // }
   }
 
   hoverIn(event: MouseEvent) {
@@ -110,6 +133,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
     if (this.siguienteSeccion.nativeElement) {
       this.siguienteSeccion.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+
+  verNoticia(noticia: Noticia) {
+    console.log(noticia);
   }
 }
 
