@@ -3,7 +3,7 @@ import {
   NgClass,
   NgIf,
   NgStyle
-} from "./chunk-DUZIHFAN.js";
+} from "./chunk-EHCGMTRC.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -36,7 +36,8 @@ import {
   ɵɵtemplateRefExtractor,
   ɵɵtext,
   ɵɵtextInterpolate
-} from "./chunk-XZJLRREG.js";
+} from "./chunk-SLFQ7YAO.js";
+import "./chunk-X6JV76XL.js";
 
 // node_modules/primeng/fesm2022/primeng-avatar.mjs
 var _c0 = ["*"];

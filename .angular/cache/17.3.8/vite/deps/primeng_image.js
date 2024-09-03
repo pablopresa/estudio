@@ -1,14 +1,14 @@
 import {
   BaseIcon,
   DomHandler
-} from "./chunk-UHCC4LAH.js";
+} from "./chunk-PLBXEFEM.js";
 import {
   PrimeNGConfig,
   PrimeTemplate,
   SharedModule,
   UniqueComponentId,
   zindexutils
-} from "./chunk-SA76WECM.js";
+} from "./chunk-HDC2MCMW.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -17,7 +17,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-DUZIHFAN.js";
+} from "./chunk-EHCGMTRC.js";
 import {
   ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
@@ -81,7 +81,8 @@ import {
   ɵɵtemplate,
   ɵɵtemplateRefExtractor,
   ɵɵviewQuery
-} from "./chunk-XZJLRREG.js";
+} from "./chunk-SLFQ7YAO.js";
+import "./chunk-X6JV76XL.js";
 
 // node_modules/@angular/animations/fesm2022/animations.mjs
 var AnimationMetadataType;

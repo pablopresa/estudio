@@ -7,10 +7,11 @@ import { AvatarModule } from 'primeng/avatar';
 import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
 import { ImageCardComponent } from './components/image-card/image-card.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [],
   imports: [ RouterOutlet, ImageCardComponent],
-  exports: [ CommonModule, ButtonModule, RouterOutlet, ToolbarModule, AvatarModule, ImageModule, CardModule, ImageCardComponent],
+  exports: [ CommonModule, ButtonModule, RouterOutlet, ToolbarModule, AvatarModule, ImageModule, CardModule, ImageCardComponent, InputTextModule],
 })
 export class SharedModules {}
