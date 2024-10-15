@@ -1,0 +1,14 @@
+::ng-deep .card-solucion {
+    width: 18em;
+    height: 21em;
+    margin-right: 5em
+  }
+
+  ::ng-deep .card-solucion .p-card-content {
+    height: 11.4em;
+  }
+
+  ::ng-deep .card-solucion .p-card-content img {
+    width: 16em;
+    height: 11em;
+  }

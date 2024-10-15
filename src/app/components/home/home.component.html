@@ -1,13 +1,13 @@
 <p-toolbar [style]="estilosNavbar">
     <div class="p-toolbar-group-left">
-        <img src="./../assets/logo3.png" alt="Logo" class="ml-6 logo-navbar">
-        <p class="ml-5">Estudio Tassano Ferrés
+        <img id="navbar" src="./../assets/logo3.png" alt="Logo" class="ml-6 logo-navbar">
+        <p class="ml-5 tituloEstudio">{{tituloCabezal}}
         </p>
     </div>
 
     <div class="p-toolbar-group-right boton-navbar-container">
         <ng-container *ngFor="let boton of botones">
-            <p-button class="boton-navbar" label="{{boton.titulo}}" [text]="true" (click)="scrollear(boton.valor)"
+            <p-button class="boton-navbar" label="{{boton.titulo}}" [text]="true" (click)="scrollear(boton.valor, boton.tipo)"
                 size="large"></p-button>
         </ng-container>
     </div>
@@ -15,40 +15,41 @@
 
 <div class="imagen-fondo-1 largo1Pantalla" id="inicio">
 
-    <div class="card-container">
-        <p-card id="card-estudio-juridico-img" header="Solución Jurídica" subheader="Dra. Juliana Tassano">
-            <p-image alt="Card" src="../../../assets/juridico1.jpg"></p-image>
+    <div class="card-solucion-container">
+        <p-card styleClass="card-solucion" header="Solución Jurídica" subheader="Dra. Juliana Tassano">
+            <p-image alt="Card" src="../../../assets/juridico1.jpg" styleClass="card-solucion-imagen"></p-image>
             <div></div>
             <ng-template pTemplate="footer">
                 <div class="button-container flex mt-1">
-                    <p-button class="card-button" id="btn-ver-mas-juridica" (click)="verSolucion('juridica')"
-                        label="Más" styleClass="w-full" />
+                    <p-button class="card-solucion-button" (click)="verSolucion('juridica')" label="Más"
+                        styleClass="w-full" />
                 </div>
             </ng-template>
         </p-card>
 
-        <p-card class="card-solucion" id="card-estudio-contable-img" header="Solución Contable"
-            subheader="Cra. Florencia Tassano">
-            <p-image alt="Card" src="../../../assets/estudio-contable.jpg"></p-image>
+        <p-card styleClass="card-solucion" header="Solución Contable" subheader="Cra. Florencia Tassano">
+            <p-image alt="Card" src="../../../assets/estudio-contable.jpg" styleClass="card-solucion-imagen"></p-image>
             <div></div>
             <ng-template pTemplate="footer">
                 <div class="button-container flex mt-1">
-                    <p-button class="card-button" id="btn-ver-mas-contable" (click)="verSolucion('contable')"
-                        label="Más" styleClass="w-full" />
+                    <p-button class="card-solucion-button" (click)="verSolucion('contable')" label="Más"
+                        styleClass="w-full" />
                 </div>
             </ng-template>
         </p-card>
+
+        <!-- TODO: Pasar a componente -->
+        <app-image-card></app-image-card>
+    
     </div>
 </div>
 
 <div>
     <p class="frase1"> {{ frase1 }}</p>
-    <p style="text-align:right; font-style: italic; padding-right:17em;  margin:0 0 1em 0"> {{ frase2 }}</p>
+    <p class="frase2"> {{ frase2 }}</p>
 </div>
 
 <div class="imagen-fondo-2 largo1Pantalla" id="nosotros">
-
-    <h2 class="titulo">Nosotros</h2>
 
     <div class="nosotros-container">
         <!-- Sección Florencia -->
@@ -57,27 +58,16 @@
                 <img src="../../../assets/fotoFlo.jpg" alt="Foto Flo" class="foto-img">
             </div>
             <div class="presentacion">
-                <h3>Florencia Tassano Ferrés</h3>
-                <p>Hola! Soy Florencia, una mamá emprendedora de 31 años, con experiencia en Contabilidad y Recursos
-                    Humanos, me formé en la Universidad de la República del Uruguay.</p>
-                <p>Luego de varios años de administrar mi propio emprendimiento, decidí ofrecer asesoramiento a empresas
-                    y personas que lo necesiten, con el objetivo de seguir ganando experiencia y equilibrar mi vida
-                    laboral y familiar.</p>
-                <p>Mi objetivo es facilitar la vida de mis clientes ocupándome de las complejidades administrativas y
-                    contables, permitiéndoles enfocarse en el crecimiento y éxito de sus negocios.</p>
+                <h3>{{tituloFlo}}</h3>
+                <p *ngFor="let parrafo of descripcionFlo">{{parrafo}}</p>
             </div>
         </div>
 
         <!-- Sección Juliana -->
         <div class="persona-container ">
             <div class="presentacion">
-                <h3>Juliana Tassano Ferrés</h3>
-                <p>Hola mi nombre es Juliana Tassano Ferrés, soy Abogada egresada de la Udelar. Me considero una
-                    apasionada del derecho.</p>
-                <p>Abrimos este nuevo espacio junto con mi hermana para poder tener más llegada a uds, y que a su vez
-                    uds
-                    tengan un espacio para poder obtener más herramientas legales y contables mediante los conocimientos
-                    y experiencias que iremos compartiendo.</p>
+                <h3>{{tituloJuli}}</h3>
+                <p *ngFor="let parrafo of descripcionJuli">{{parrafo}}</p>
             </div>
             <div class="foto">
                 <img src="../../../assets/fotoJuli.jpg" alt="Foto Juli" class="foto-img">
@@ -88,29 +78,28 @@
 </div>
 <div class="imagen-fondo-3 largo1Pantalla" id="noticias">
 
-    <h2 class="titulo">Noticias</h2>
-
-    <!-- <div class="card-container-noticias">
-        <div class="card-item-noticia" *ngFor="let noticia of noticias">
-            <p-card header="{{noticia.titulo}}" [style]="cardNoticia">
-                <ng-template pTemplate="header">
-                    <img alt="Card" [src]="noticia.linkFoto" />
+    <div class="card-noticia-container">
+        <div *ngFor="let noticia of noticias">
+            <p-card header="{{noticia.titulo}}" styleClass="card-noticia">
+                <p-image alt="Card" src="{{noticia.linkFoto}}" styleClass="card-noticia-imagen"></p-image>
+                <div></div>
+                <ng-template pTemplate="footer">
+                    <p>
+                        {{noticia.descripcion | sliceConPuntos: cantidadLetrasMostradasNoticia}}
+                    </p>
+                    <div class="button-container flex mt-1">
+                        <p-button class="card-solucion-button" (click)="verNoticia(noticia)" label="Ver más"
+                            styleClass="w-full" />
+                    </div>
                 </ng-template>
-                <p>
-                    {{noticia.descripcion}}
-                </p>
-                <div class="button-container flex mt-1">
-                    <p-button (click)="verNoticia(noticia)" label="Ver más" styleClass="w-full" />
-                </div>
             </p-card>
         </div>
-    </div> -->
+    </div>
 
-</div>
-
-<div class="sobre-nosotros">
-    <p style="text-align:right; font-style: italic; padding-right:17em;  margin:0 0 1em 0"> {{ sobreNosotros }}</p>
 </div>
 
 <div class="imagen-fondo-2 largo1Pantalla">
+</div>
+
+<div class="imagen-fondo-1 largo1Pantalla">
 </div>

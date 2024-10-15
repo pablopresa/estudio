@@ -4,10 +4,11 @@ import { BaseComponent } from '../base/base.component';
 import { Mensajes } from '../../recursos/mensajes';
 import { Noticia } from '../../model/noticia';
 import { Router } from '@angular/router';
+import { NoticiasService } from '../../services/noticias/noticias.service';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
+standalone: true,
   imports: [SharedModules],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -26,27 +27,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   title = Mensajes.TITULO_PANTALLA;
 
-  noticias: Noticia[] = [
-    {
-      titulo: 'Temporal Santa Rosa: Inumet advirtió por lluvias, tormentas y vientos fuertes durante este fin de semana',
-      descripcion: 'El fenómeno sobre el que advirtió Inumet es el que otros meteorólogos han conectado con el temporal de San Rosa, esperado cada año para el 30 de agosto',
-      linkFoto: 'https://media.elobservador.com.uy/p/d842de87e438fc4c568869ceec07b86c/adjuntos/362/imagenes/100/469/0100469627/1000x0/smart/-ine7266-jpgwebp.webp'
-    },
-    {
-      titulo: '"Tendremos Santa Rosa": el meteorólogo Mario Bidegain pronosticó un temporal para esta semana',
-      descripcion: 'Al igual que Bidegain, el meteorólogo Nubel Cisneros había previsto un ciclón extratropical para el viernes',
-      linkFoto: 'https://media.elobservador.com.uy/p/a73ede29230c3a542ab2a5c821fd5e20/adjuntos/362/imagenes/100/469/0100469846/1000x0/smart/_ine7873-awebp.webp'
-    },
-    {
-      titulo: 'Meteorólogos sobre el temporal de Santa Rosa: cuándo es y cómo estará el clima',
-      descripcion: 'Este fenómeno se debe a la "alta variabilidad atmosférica en este periodo estacional de transición de una más fría a una estación más templada"',
-      linkFoto: 'https://media.elobservador.com.uy/p/23ecddf4e74d7faeeb1c749bb6c2c42f/adjuntos/362/imagenes/100/508/0100508873/1000x0/smart/tormentas-clima-el-tiempo.jpg'
-    }
-  ];
-
-  cardNoticia: any = {
-    width: '33%'
-  }
+  noticias: Noticia[] = [];
 
   public descripcionEmpresa: string = Mensajes.TEXTO_DESCRIPCION_EMPRESA;
   public tituloSolucionContable: string = Mensajes.TITULO_SOLUCION_CONTABLE;
@@ -58,15 +39,43 @@ export class HomeComponent extends BaseComponent implements OnInit {
   public frase2: string = Mensajes.FRASE_STEVE_JOBS2;
   public sobreNosotros: string = Mensajes.SOBRE_NOSOTROS;
   public estilosNavbar: any;
-  botones: any[] = [{ titulo: 'Inicio', valor: 'inicio' }, { titulo: 'Nosotros', valor: 'nosotros' }, { titulo: 'Noticias', valor: 'noticias' },
-  { titulo: 'Legal', valor: 'legal' }, { titulo: 'Contable', valor: 'contable' }, { titulo: 'Contacto', valor: 'contacto' }];
+  botones: any[] = [
+    { titulo: 'Inicio', valor: 'inicio', tipo: 'scroll' },
+    { titulo: 'Nosotros', valor: 'nosotros', tipo: 'scroll' },
+    { titulo: 'Noticias', valor: 'noticias', tipo: 'scroll' },
+    { titulo: 'Legal', valor: 'juridica', tipo: 'navegacion' },
+    { titulo: 'Contable', valor: 'contable', tipo: 'navegacion' },
+    { titulo: 'Contacto', valor: 'contacto', tipo: 'scroll' }
+  ];
+  public cantidadLetrasMostradasNoticia: number = 110;
+  public tituloFlo = 'Florencia Tassano Ferrés'
+  public descripcionFlo: string[] = [
+    'Hola! Soy Florencia, una mamá emprendedora de 31 años, con experiencia en Contabilidad y Recursos Humanos, me formé en la Universidad de la República del Uruguay.',
+    'Luego de varios años de administrar mi propio emprendimiento, decidí ofrecer asesoramiento a empresas y personas que lo necesiten, con el objetivo de seguir ganando experiencia y equilibrar mi vida laboral y familiar.',
+    'Mi objetivo es facilitar la vida de mis clientes ocupándome de las complejidades administrativas y contables, permitiéndoles enfocarse en el crecimiento y éxito de sus negocios.'
+  ];
 
-  constructor(private router: Router, private renderer: Renderer2, private elementRef: ElementRef) {
+  public tituloJuli = 'Juliana Tassano Ferrés'
+  public descripcionJuli: string[] = [
+    'Hola, mi nombre es Juliana Tassano Ferrés, soy Abogada egresada de la Udelar. Me considero una apasionada del derecho.',
+    'Abrimos este nuevo espacio junto con mi hermana para poder tener más llegada a uds, y que a su vez uds tengan un espacio para poder obtener más herramientas legales y contables mediante los conocimientos y experiencias que iremos compartiendo.'
+  ];
+
+  public tituloCabezal: string = 'Estudio Tassano Ferrés';
+
+  private screenWidth: number | null = null;
+  private screenHeight: number | null = null;
+
+  constructor(private router: Router, private renderer: Renderer2, private elementRef: ElementRef,
+    private noticiasService: NoticiasService) {
     super();
   }
 
+
+
   ngOnInit(): void {
 
+    this.verCards(true);
     const color1 = '#e6e6e6';
     const color2 = 'var(--orange-100)';
     this.estilosNavbar = {
@@ -78,70 +87,46 @@ export class HomeComponent extends BaseComponent implements OnInit {
       'z-index': 40
     };
 
-    this.verCards(true);
+    this.cargarNoticias();
+  }
+
+  cargarNoticias() {
+
+    this.noticiasService.obtenerNoticias().subscribe(
+      respuesta => {
+        this.noticias = respuesta;
+      }
+    )
   }
 
   verCards(ver: boolean) {
+    const cards = this.elementRef.nativeElement.querySelectorAll('.card-solucion');
+    if (cards.length > 0) {
+      cards.forEach((card: HTMLElement) => {
+        this.renderer.setStyle(card, 'opacity', ver ? '1' : '0');
+        this.renderer.setStyle(card, 'visibility', ver ? 'visible' : 'hidden');
+      })
+      // const botones = this.elementRef.nativeElement.querySelectorAll('.card-solucion-button');
+      // if (botones.length > 0) {
+      //   botones.forEach((boton: HTMLElement) => {
+      //     this.renderer.setStyle(boton, 'opacity', ver ? '1' : '0');
+      //     this.renderer.setStyle(boton, 'visibility', ver ? 'visible' : 'hidden');
+      //   });
+      // }
+    }
+  }
 
-    const cardJ = this.elementRef.nativeElement.querySelector('#card-estudio-juridico-img');
-    const cardC = this.elementRef.nativeElement.querySelector('#card-estudio-contable-img');
-
-    if (cardJ && cardC) {
-      this.renderer.setStyle(cardJ, 'opacity', ver ? '1' : '0');
-      this.renderer.setStyle(cardJ, 'visibility', ver ? 'visible' : 'hidden');
-      this.renderer.setStyle(cardC, 'opacity', ver ? '1' : '0');
-      this.renderer.setStyle(cardC, 'visibility', ver ? 'visible' : 'hidden');
-
-      const botonJ = this.elementRef.nativeElement.querySelector('#btn-mas-juridico');
-      const botonC = this.elementRef.nativeElement.querySelector('#btn-mas-contable');
-
-      if (botonJ && botonC) {
-        this.renderer.setStyle(botonJ, 'opacity', ver ? '1' : '0');
-        this.renderer.setStyle(botonJ, 'visibility', ver ? 'visible' : 'hidden');
-        this.renderer.setStyle(botonC, 'opacity', ver ? '1' : '0');
-        this.renderer.setStyle(botonC, 'visibility', ver ? 'visible' : 'hidden');
+  public scrollear(seccion: string, tipo: string) {
+    if (tipo == 'scroll') {
+      const element = document.getElementById(seccion);
+      const navbar = document.getElementById('navbar');
+      if (element && navbar) {
+        const navbarHeight = navbar.offsetHeight;
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }
-
-  public scrollear(seccion: string) {
-    const element = document.getElementById(seccion);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-
-  // hoverIn(event: MouseEvent) {
-
-  //   const card = event.currentTarget as HTMLElement;
-  //   if (card) {
-
-  //     this.renderer.setStyle(card, 'transform', 'scale(1.05)');
-  //     this.renderer.setStyle(card, 'transition', 'transform 0.3s');
-
-  //     const boton = card.querySelector('.card-button') as HTMLElement;
-  //     this.renderer.setStyle(boton, 'opacity', '1');
-  //     this.renderer.setStyle(boton, 'visibility', 'visible');
-  //   }
-  // }
-
-  // hoverOut(event: MouseEvent) {
-  //   const card = event.currentTarget as HTMLElement;
-  //   if (card) {
-
-  //     this.renderer.setStyle(card, 'transform', 'scale(1)');
-  //     this.renderer.setStyle(card, 'transition', 'transform 0.3s');
-
-  //     const boton = card.querySelector('.card-button') as HTMLElement;
-  //     this.renderer.setStyle(boton, 'opacity', '0');
-  //     this.renderer.setStyle(boton, 'visibility', 'hidden');
-  //   }
-  // }
-
-
-  scrollearAbajo() {
-    if (this.siguienteSeccion.nativeElement) {
-      this.siguienteSeccion.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    else if (tipo == 'navegacion') {
+      this.router.navigate([seccion]);
     }
   }
 
@@ -151,12 +136,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   verSolucion(tipo: string) {
-    if (tipo == 'contable') {
-      console.log('Ver solución contable');
-    }
-    else if (tipo == 'juridica') {
-      console.log('Ver solución jurídica');
-    }
+    this.router.navigate([tipo]);
   }
 }
 

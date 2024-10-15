@@ -1,18 +1,20 @@
-import { Component, Input } from '@angular/core';
-import { SharedModules } from '../../shared.module';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image-card',
-  standalone: true,
-  imports: [SharedModules],
   templateUrl: './image-card.component.html',
-  styleUrls: ['./image-card.component.css']
+  styleUrls: ['./image-card.component.css'],
 })
 export class ImageCardComponent {
-  @Input() imagen: string = '';
-  ancho: number = 300;
-  alto: number = 400;
-  @Input() textoBoton: string = '';
+  @Input() header = "Solución Contable";
+  @Input() subHeader = "Cra. Florencia Tassano";
+  @Input() imagen = "../../../assets/estudio-contable.jpg";
+  @Input() boton = { metodo: 'verSolucionContable', texto: 'Más' };
+  @Output() metodo: EventEmitter<string> = new EventEmitter();
 
   constructor() {}
+
+  metodoExterno() {
+    this.metodo.emit(this.boton.metodo);
+  }
 }

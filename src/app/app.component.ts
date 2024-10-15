@@ -3,7 +3,7 @@ import { SharedModules } from './shared.module';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
+standalone: true,
   imports: [SharedModules],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
